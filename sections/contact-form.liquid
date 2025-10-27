@@ -141,7 +141,7 @@
     {%- endform -%}
     </div>
      <div class="right_contact">
-      <p>By providing a telephone number and submitting the form, you consent to be contacted by SMS text message from JSP Limited Enterprises LLC. Message frequency may vary. Message & data rates may apply. Reply STOP to opt out of further messaging. Reply HELP for more information.</p>
+   {{ section.settings.desc }}
       </div>
     </div>
   </div>
@@ -161,6 +161,11 @@
       "id": "heading",
       "default": "t:sections.contact-form.settings.title.default",
       "label": "t:sections.contact-form.settings.title.label"
+    },
+     {
+      "type": "richtext",
+      "id": "desc",
+      "label": "Description"
     },
     {
       "type": "select",

@@ -141,7 +141,9 @@
     {%- endform -%}
     </div>
      <div class="right_contact">
+       {%- if section.settings.desc != blank -%}
    {{ section.settings.desc }}
+    {%- endif -%}
       </div>
     </div>
   </div>

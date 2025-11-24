@@ -239,3 +239,17 @@
   ]
 }
 {% endschema %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const checkbox = document.getElementById('ContactForm-agree');
+  const textarea = document.getElementById('ContactForm-body');
+
+  // Default: textarea disabled
+  textarea.disabled = true;
+
+  // Toggle textarea on checkbox change
+  checkbox.addEventListener('change', function () {
+    textarea.disabled = !this.checked;
+  });
+});
+</script>

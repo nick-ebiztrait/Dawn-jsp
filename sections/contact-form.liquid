@@ -9,8 +9,8 @@
   @media screen and (min-width: 750px) {
     .main_contact {
       display: grid;
-    grid-template-columns: 48% 48%;
-    column-gap: 4%;
+      grid-template-columns: 48% 48%;
+      column-gap: 4%;
     }
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
@@ -28,14 +28,17 @@
     {%- else -%}
       <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
     {%- endif -%}
+
     {%- liquid
       assign contact_form_class = 'isolate'
       if settings.animations_reveal_on_scroll
         assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
       endif
     -%}
+
     <div class="main_contact">
       <div class="left_contact">
+
     {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
       {%- if form.posted_successfully? -%}
         <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
@@ -58,6 +61,7 @@
           </li>
         </ul>
       {%- endif -%}
+
       <div class="contact__fields">
         <div class="field">
           <input
@@ -71,6 +75,7 @@
           >
           <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
         </div>
+
         <div class="field field--with-error">
           <input
             autocomplete="email"
@@ -90,8 +95,9 @@
           >
           <label class="field__label" for="ContactForm-email">
             {{- 'templates.contact.form.email' | t }}
-            <span aria-hidden="true">*</span></label
-          >
+            <span aria-hidden="true">*</span>
+          </label>
+
           {%- if form.errors contains 'email' -%}
             <small class="contact__field-error" id="ContactForm-email-error">
               <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
@@ -106,6 +112,7 @@
           {%- endif -%}
         </div>
       </div>
+
       <div class="field">
         <input
           type="tel"
@@ -119,6 +126,7 @@
         >
         <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
       </div>
+
       <div class="field">
         <textarea
           rows="10"
@@ -126,26 +134,37 @@
           class="text-area field__input"
           name="contact[{{ 'templates.contact.form.comment' | t }}]"
           placeholder="{{ 'templates.contact.form.comment' | t }}"
-        >
-          {{- form.body -}}
-        </textarea>
+        >{{- form.body -}}</textarea>
+
         <label class="form__label field__label" for="ContactForm-body">
           {{- 'templates.contact.form.comment' | t -}}
         </label>
       </div>
+
+      <!-- ✅ CHECKBOX ADDED HERE -->
+      <div class="field checkbox-field">
+        <label for="ContactForm-agree" class="checkbox-label">
+          <input type="checkbox" id="ContactForm-agree" name="contact[Agree]" required>
+          I agree to the terms & conditions
+        </label>
+      </div>
+      <!-- END CHECKBOX -->
+
       <div class="contact__button">
         <button type="submit" class="button">
           {{ 'templates.contact.form.send' | t }}
         </button>
       </div>
+
     {%- endform -%}
     </div>
-     <div class="right_contact">
-       {%- if section.settings.desc != blank -%}
-   {{ section.settings.desc }}
-    {%- endif -%}
-      </div>
+
+    <div class="right_contact">
+      {%- if section.settings.desc != blank -%}
+        {{ section.settings.desc }}
+      {%- endif -%}
     </div>
+
   </div>
 </div>
 
@@ -164,7 +183,7 @@
       "default": "t:sections.contact-form.settings.title.default",
       "label": "t:sections.contact-form.settings.title.label"
     },
-     {
+    {
       "type": "richtext",
       "id": "desc",
       "label": "Description"
@@ -173,26 +192,11 @@
       "type": "select",
       "id": "heading_size",
       "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        },
-        {
-          "value": "hxl",
-          "label": "t:sections.all.heading_size.options__4.label"
-        },
-        {
-          "value": "hxxl",
-          "label": "t:sections.all.heading_size.options__5.label"
-        }
+        { "value": "h2", "label": "t:sections.all.heading_size.options__1.label" },
+        { "value": "h1", "label": "t:sections.all.heading_size.options__2.label" },
+        { "value": "h0", "label": "t:sections.all.heading_size.options__3.label" },
+        { "value": "hxl", "label": "t:sections.all.heading_size.options__4.label" },
+        { "value": "hxxl", "label": "t:sections.all.heading_size.options__5.label" }
       ],
       "default": "h1",
       "label": "t:sections.all.heading_size.label"

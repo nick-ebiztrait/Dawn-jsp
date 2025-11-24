@@ -146,7 +146,8 @@
       </div>
 
       <!-- ✅ CHECKBOX ADDED HERE -->
-      <div class="field checkbox-field">
+<div class="check-box-wrapper">
+        <div class="checkbox-field">
         <label for="ContactForm-agree" class="checkbox-label">
           <input type="checkbox" id="ContactForm-agree" name="contact[Agree]" required>
           I agree to the terms & conditions
@@ -159,6 +160,7 @@
           {{ 'templates.contact.form.send' | t }}
         </button>
       </div>
+</div>
 
     {%- endform -%}
     </div>

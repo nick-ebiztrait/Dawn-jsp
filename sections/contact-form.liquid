@@ -256,15 +256,11 @@
 {% endschema %}
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const checkbox = document.getElementById('ContactForm-agree');
-  const textarea = document.getElementById('ContactForm-body');
+  const checkbox = document.getElementById('ContactForm-updates');
+  const hiddenField = document.getElementById('updateStatus');
 
-  // Default: textarea disabled
-  textarea.disabled = true;
-
-  // Toggle textarea on checkbox change
   checkbox.addEventListener('change', function () {
-    textarea.disabled = !this.checked;
+    hiddenField.value = this.checked ? 'Yes' : 'No';
   });
 });
 </script>

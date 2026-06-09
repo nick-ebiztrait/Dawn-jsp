@@ -39,7 +39,10 @@
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
-
+    <link rel="preload" as="style" media="screen" href="https://jsplimitedenterprisesllc.com/cdn/shopifycloud/portable-wallets/latest/accelerated-checkout-backwards-compat.css" crossorigin="anonymous">
+ <link rel="preload" href="{{ 'component-slideshow.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{ 'component-slider.css' | asset_url }}" as="style">
+   <link rel="preload" href="{{ 'base.css' | asset_url }}" as="style">
     {% render 'meta-tags' %}
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>

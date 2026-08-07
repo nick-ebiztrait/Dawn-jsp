@@ -1,0 +1,21 @@
+{% if article.metafields.custom.faq_json != blank %}
+  {% assign faqs = article.metafields.custom.faq_json.value %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for faq in faqs %}
+      {
+        "@type": "Question",
+        "name": {{ faq.question | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ faq.answer | json }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+  </script>
+{% endif %}

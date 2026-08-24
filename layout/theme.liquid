@@ -344,6 +344,36 @@
 </script>
 {% render "scripts" %}
 {% render 'schema' %}
+{% comment %}
+  ORGANIZATION + WEBSITE SCHEMA
+  Sitewide — add once before </head>
+{% endcomment %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": {{ shop.url | json }},
+  "logo": "{% if settings.logo %}https:{{ settings.logo | image_url: width: 600 }}{% endif %}",
+  "description": {{ shop.description | default: 'Premium eco-friendly kitchen accessories and tools.' | strip_html | json }},
+  "sameAs": []
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ shop.name | json }},
+  "url": {{ shop.url | json }},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ shop.url }}/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}   {% if template == 'index' %} home-page

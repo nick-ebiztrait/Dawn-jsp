@@ -719,10 +719,49 @@
         assign seo_media = product.featured_media
       endif
     -%}
-
-    <script type="application/ld+json">
+      {% comment %}
+  PRODUCT SCHEMA
+  Where to add: sections/main-product.liquid (or templates/product.liquid,
+  depending on theme structure) — anywhere inside the product template.
+  This is dynamic: it pulls real data per-product automatically, so it
+  covers all 312 products with one snippet, no manual entry needed.
+{% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | truncatewords: 60 | json }},
+  "sku": {{ product.selected_or_first_available_variant.sku | default: product.id | json }},
+  "image": [
+    {% for image in product.images limit: 5 %}
+      "https:{{ image | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | default: shop.name | json }}
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ shop.url }}{{ product.url }}",
+    "priceCurrency": "{{ cart.currency.iso_code }}",
+    "price": "{{ product.selected_or_first_available_variant.price | money_without_currency | strip_html }}",
+    "availability": "https://schema.org/{% if product.selected_or_first_available_variant.available %}InStock{% else %}OutOfStock{% endif %}",
+    "itemCondition": "https://schema.org/NewCondition"
+  }
+  {% if product.metafields.reviews.rating.value %}
+  ,"aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ product.metafields.reviews.rating.value.rating }}",
+    "reviewCount": "{{ product.metafields.reviews.rating_count }}"
+  }
+  {% endif %}
+}
+</script>
+    {% comment %} <script type="application/ld+json">
       {{ product | structured_data }}
-    </script>
+    </script> {% endcomment %}
   </div>
 </product-info>
 
